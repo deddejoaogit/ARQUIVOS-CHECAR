@@ -1,0 +1,1155 @@
+﻿=== MAPA17 2026-09-23T15:06:46 ===
+== A) Scene_OmoMenuBase / Scene_MenuBase / fundo ==
+----- Omori BASE.js lin 5074 -----
+  Scene_Base.prototype.create.call(this);
+  this.playGameoverMusic();
+  this.createBackground();
+  this.createRetryWindows();
+};
+
+Yanfly.Core.Scene_Gameover_start = function() {
+    Scene_Base.prototype.start.call(this);
+    this.startFadeIn(this.slowFadeSpeed()*6, false);
+}
+//=============================================================================
+// * Create Background
+//=============================================================================
+Scene_Gameover.prototype.createBackground = function() {
+  // Create Backsprite
+  this._backSprite = new Sprite();
+  this._backSprite.bitmap = new Bitmap(Graphics.boxWidth, Graphics.boxHeight)//ImageManager.loadSystem('GameOverBG');
+  this._backSprite.bitmap.fillAll("black");
+  this.addChild(this._backSprite);
+  // Create Game Over Text
+  let bitmap = ImageManager.loadSystem('GameOverText');
+  this._textSprite = new Sprite(bitmap);
+  this._textSprite.x = (Graphics.width - bitmap.width) / 2;
+  this._textSprite.baseY = Math.ceil((Graphics.height - bitmap.height) / 2.5)
+  this._textSprite.y = this._textSprite.baseY;
+  this.addChild(this._textSprite);
+
+  // Create Omori Sprite
+  bitmap = ImageManager.loadPicture('name_input');
+  this._omoriSprite = new Sprite(bitmap);
+  this._omoriSprite.x = (Graphics.width - bitmap.width) / 2;
+  this._omoriSprite.y = ((Graphics.height - this._omoriSprite.width) / 2) + 74;
+  this._omoriSprite.opacity = 0;
+  this.addChild(this._omoriSprite);
+};
+//=============================================================================
+// * Create Retry Windows
+//=============================================================================
+Scene_Gameover.prototype.createRetryWindows = function() {
+  // Initialize Retry Windows Array
+  this._retryWindows = [];
+  // List of text
+  let text = [LanguageManager.getMessageData("XX_SYSTEM.message_10").text, LanguageManager.getMessageData("XX_SYSTEM.message_11").text];
+
+----- Omori BASE.js lin 5085 -----
+// * Create Background
+//=============================================================================
+Scene_Gameover.prototype.createBackground = function() {
+  // Create Backsprite
+  this._backSprite = new Sprite();
+  this._backSprite.bitmap = new Bitmap(Graphics.boxWidth, Graphics.boxHeight)//ImageManager.loadSystem('GameOverBG');
+  this._backSprite.bitmap.fillAll("black");
+  this.addChild(this._backSprite);
+  // Create Game Over Text
+  let bitmap = ImageManager.loadSystem('GameOverText');
+  this._textSprite = new Sprite(bitmap);
+  this._textSprite.x = (Graphics.width - bitmap.width) / 2;
+  this._textSprite.baseY = Math.ceil((Graphics.height - bitmap.height) / 2.5)
+  this._textSprite.y = this._textSprite.baseY;
+  this.addChild(this._textSprite);
+
+  // Create Omori Sprite
+  bitmap = ImageManager.loadPicture('name_input');
+  this._omoriSprite = new Sprite(bitmap);
+  this._omoriSprite.x = (Graphics.width - bitmap.width) / 2;
+  this._omoriSprite.y = ((Graphics.height - this._omoriSprite.width) / 2) + 74;
+  this._omoriSprite.opacity = 0;
+  this.addChild(this._omoriSprite);
+};
+//=============================================================================
+// * Create Retry Windows
+//=============================================================================
+Scene_Gameover.prototype.createRetryWindows = function() {
+  // Initialize Retry Windows Array
+  this._retryWindows = [];
+  // List of text
+  let text = [LanguageManager.getMessageData("XX_SYSTEM.message_10").text, LanguageManager.getMessageData("XX_SYSTEM.message_11").text];
+  // Go Through Text
+  for (let i = 0; i < text.length; i++) {
+    let win = new Window_Base(0, 0, 0, 0);
+    win.standardPadding = function() { return 4; };
+    win.initialize(0, 0, win.contents.measureTextWidth(text[i]) + win.standardPadding() * 4, 32)
+    win.contents.fontSize = 26;
+
+    win.x = Math.floor(Graphics.boxWidth / 2.6) + i * 100
+    win.y = 380;
+    win.drawOpacity = 0;
+    win.opacity = 0;
+
+----- Omori BASE.js lin 5656 -----
+  Window_Base.prototype.initialize.call(this, 0, 0, this.windowWidth(), this.windowHeight());
+  // Create Background
+  this.createBackground();
+};
+//=============================================================================
+// * Define Openness
+//=============================================================================
+Object.defineProperty(Window_MessageFaceBox.prototype, 'openness', {
+  get: function() { return this._openness; },
+  set: function(value) {
+    // Super Call
+    Object.getOwnPropertyDescriptor(Window.prototype, 'openness').set.call(this, value);
+    // If Background Exists
+    if (this._background) {
+      this._background.scale.x = this._windowSpriteContainer.scale.x;
+      this._background.scale.y = this._windowSpriteContainer.scale.y;
+      this._background.x = this._windowSpriteContainer.x + 5;
+      this._background.y = this._windowSpriteContainer.y + 5;
+    };
+  },
+  configurable: true
+});
+//=============================================================================
+// * Settings
+//=============================================================================
+Window_MessageFaceBox.prototype.standardPadding = function() { return 5; };
+Window_MessageFaceBox.prototype.windowWidth = function() { return 114; };
+Window_MessageFaceBox.prototype.windowHeight = function() { return 114; };
+Window_MessageFaceBox.prototype.standardOpennessType = function() { return 2;};
+//=============================================================================
+// * Determine if Face is ready
+//=============================================================================
+Window_MessageFaceBox.prototype.isFaceReady = function() {
+  if (this._faceBitmap) { return this._faceBitmap.isReady(); };
+  return true;
+};
+//=============================================================================
+// * Create Background Sprite
+//=============================================================================
+Window_MessageFaceBox.prototype.createBackground = function() {
+  // Create Background Sprite
+  this._background = new Sprite(new Bitmap(this.width - 10, this.height - 10));
+  this._background.x = 5
+
+----- Omori BASE.js lin 5693 -----
+// * Create Background Sprite
+//=============================================================================
+Window_MessageFaceBox.prototype.createBackground = function() {
+  // Create Background Sprite
+  this._background = new Sprite(new Bitmap(this.width - 10, this.height - 10));
+  this._background.x = 5
+  this._background.y = 5;
+  this.addChildToBack(this._background);
+};
+//=============================================================================
+// * Clear
+//=============================================================================
+Window_MessageFaceBox.prototype.clear = function() {
+  // Set Face Bitmap
+  this._faceBitmap = null;
+  // Face Name
+  this._faceName = "";
+  // Face Index
+  this._faceIndex = 0;
+};
+//=============================================================================
+// * Set Background Color
+//=============================================================================
+Window_MessageFaceBox.prototype.setBackgroundColor = function(color = 'rgba(0, 0, 0, 0)') {
+  // If Color
+  if (color) {
+    // Set Background Bitmap Color
+    this._background.bitmap.fillAll(color);
+  } else {
+    // Clear Background Bitmap Color
+    this._background.bitmap.clear();
+  };
+};
+//=============================================================================
+// * Setup
+//=============================================================================
+Window_MessageFaceBox.prototype.setup = function(faceName, faceIndex, color = null) {
+  // Set Face Index
+  this._faceIndex = faceIndex;
+  // Set Face Name
+  this._faceName = faceName;
+  // Set Face Bitmap
+  this._faceBitmap = ImageManager.loadFace(faceName);
+
+----- Omori Main Menu.js lin 882 -----
+
+//=============================================================================
+// ** Scene_OmoMenuBase
+//-----------------------------------------------------------------------------
+// Base Class for Omori Menu Scenes
+//=============================================================================
+function Scene_OmoMenuBase() { this.initialize.apply(this, arguments); }
+Scene_OmoMenuBase.prototype = Object.create(Scene_BaseEX.prototype);
+Scene_OmoMenuBase.prototype.constructor = Scene_OmoMenuBase;
+//=============================================================================
+// * Object Initialization
+//=============================================================================
+Scene_OmoMenuBase.prototype.initialize = function() {
+  // Super Call
+  Scene_BaseEX.prototype.initialize.call(this);
+  // Set Background Bitmap to null
+  this._backgroundBitmap = null;
+};
+//=============================================================================
+// * Set Background Bitmap
+//=============================================================================
+Scene_OmoMenuBase.prototype.setBackgroundBitmap = function(bitmap) {
+  this._backgroundBitmap = bitmap
+};
+//=============================================================================
+// * Create
+//=============================================================================
+Scene_OmoMenuBase.prototype.create = function() {
+  // Create Command Window
+  this.createCommandWindow();
+  // Super Call
+  Scene_BaseEX.prototype.create.call(this);
+  // Create Status Window
+  this.createStatusWindow();
+};
+//=============================================================================
+// * Set Command Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.setCommandWindow = function(win) {
+  this._commandWindow = win;
+};
+//=============================================================================
+// * Set Status Window
+
+----- Omori Main Menu.js lin 886 -----
+// Base Class for Omori Menu Scenes
+//=============================================================================
+function Scene_OmoMenuBase() { this.initialize.apply(this, arguments); }
+Scene_OmoMenuBase.prototype = Object.create(Scene_BaseEX.prototype);
+Scene_OmoMenuBase.prototype.constructor = Scene_OmoMenuBase;
+//=============================================================================
+// * Object Initialization
+//=============================================================================
+Scene_OmoMenuBase.prototype.initialize = function() {
+  // Super Call
+  Scene_BaseEX.prototype.initialize.call(this);
+  // Set Background Bitmap to null
+  this._backgroundBitmap = null;
+};
+//=============================================================================
+// * Set Background Bitmap
+//=============================================================================
+Scene_OmoMenuBase.prototype.setBackgroundBitmap = function(bitmap) {
+  this._backgroundBitmap = bitmap
+};
+//=============================================================================
+// * Create
+//=============================================================================
+Scene_OmoMenuBase.prototype.create = function() {
+  // Create Command Window
+  this.createCommandWindow();
+  // Super Call
+  Scene_BaseEX.prototype.create.call(this);
+  // Create Status Window
+  this.createStatusWindow();
+};
+//=============================================================================
+// * Set Command Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.setCommandWindow = function(win) {
+  this._commandWindow = win;
+};
+//=============================================================================
+// * Set Status Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.setStatusWindow = function(win) {
+  this._statusWindow = win
+};
+
+----- Omori Main Menu.js lin 887 -----
+//=============================================================================
+function Scene_OmoMenuBase() { this.initialize.apply(this, arguments); }
+Scene_OmoMenuBase.prototype = Object.create(Scene_BaseEX.prototype);
+Scene_OmoMenuBase.prototype.constructor = Scene_OmoMenuBase;
+//=============================================================================
+// * Object Initialization
+//=============================================================================
+Scene_OmoMenuBase.prototype.initialize = function() {
+  // Super Call
+  Scene_BaseEX.prototype.initialize.call(this);
+  // Set Background Bitmap to null
+  this._backgroundBitmap = null;
+};
+//=============================================================================
+// * Set Background Bitmap
+//=============================================================================
+Scene_OmoMenuBase.prototype.setBackgroundBitmap = function(bitmap) {
+  this._backgroundBitmap = bitmap
+};
+//=============================================================================
+// * Create
+//=============================================================================
+Scene_OmoMenuBase.prototype.create = function() {
+  // Create Command Window
+  this.createCommandWindow();
+  // Super Call
+  Scene_BaseEX.prototype.create.call(this);
+  // Create Status Window
+  this.createStatusWindow();
+};
+//=============================================================================
+// * Set Command Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.setCommandWindow = function(win) {
+  this._commandWindow = win;
+};
+//=============================================================================
+// * Set Status Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.setStatusWindow = function(win) {
+  this._statusWindow = win
+};
+//=============================================================================
+
+----- Omori Main Menu.js lin 888 -----
+function Scene_OmoMenuBase() { this.initialize.apply(this, arguments); }
+Scene_OmoMenuBase.prototype = Object.create(Scene_BaseEX.prototype);
+Scene_OmoMenuBase.prototype.constructor = Scene_OmoMenuBase;
+//=============================================================================
+// * Object Initialization
+//=============================================================================
+Scene_OmoMenuBase.prototype.initialize = function() {
+  // Super Call
+  Scene_BaseEX.prototype.initialize.call(this);
+  // Set Background Bitmap to null
+  this._backgroundBitmap = null;
+};
+//=============================================================================
+// * Set Background Bitmap
+//=============================================================================
+Scene_OmoMenuBase.prototype.setBackgroundBitmap = function(bitmap) {
+  this._backgroundBitmap = bitmap
+};
+//=============================================================================
+// * Create
+//=============================================================================
+Scene_OmoMenuBase.prototype.create = function() {
+  // Create Command Window
+  this.createCommandWindow();
+  // Super Call
+  Scene_BaseEX.prototype.create.call(this);
+  // Create Status Window
+  this.createStatusWindow();
+};
+//=============================================================================
+// * Set Command Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.setCommandWindow = function(win) {
+  this._commandWindow = win;
+};
+//=============================================================================
+// * Set Status Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.setStatusWindow = function(win) {
+  this._statusWindow = win
+};
+//=============================================================================
+// * Create Command Window
+
+----- Omori Main Menu.js lin 892 -----
+// * Object Initialization
+//=============================================================================
+Scene_OmoMenuBase.prototype.initialize = function() {
+  // Super Call
+  Scene_BaseEX.prototype.initialize.call(this);
+  // Set Background Bitmap to null
+  this._backgroundBitmap = null;
+};
+//=============================================================================
+// * Set Background Bitmap
+//=============================================================================
+Scene_OmoMenuBase.prototype.setBackgroundBitmap = function(bitmap) {
+  this._backgroundBitmap = bitmap
+};
+//=============================================================================
+// * Create
+//=============================================================================
+Scene_OmoMenuBase.prototype.create = function() {
+  // Create Command Window
+  this.createCommandWindow();
+  // Super Call
+  Scene_BaseEX.prototype.create.call(this);
+  // Create Status Window
+  this.createStatusWindow();
+};
+//=============================================================================
+// * Set Command Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.setCommandWindow = function(win) {
+  this._commandWindow = win;
+};
+//=============================================================================
+// * Set Status Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.setStatusWindow = function(win) {
+  this._statusWindow = win
+};
+//=============================================================================
+// * Create Command Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.createCommandWindow = function() {
+  // If Command Window Does Not Exist
+  if (!this._commandWindow) {
+
+----- Omori Main Menu.js lin 901 -----
+// * Set Background Bitmap
+//=============================================================================
+Scene_OmoMenuBase.prototype.setBackgroundBitmap = function(bitmap) {
+  this._backgroundBitmap = bitmap
+};
+//=============================================================================
+// * Create
+//=============================================================================
+Scene_OmoMenuBase.prototype.create = function() {
+  // Create Command Window
+  this.createCommandWindow();
+  // Super Call
+  Scene_BaseEX.prototype.create.call(this);
+  // Create Status Window
+  this.createStatusWindow();
+};
+//=============================================================================
+// * Set Command Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.setCommandWindow = function(win) {
+  this._commandWindow = win;
+};
+//=============================================================================
+// * Set Status Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.setStatusWindow = function(win) {
+  this._statusWindow = win
+};
+//=============================================================================
+// * Create Command Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.createCommandWindow = function() {
+  // If Command Window Does Not Exist
+  if (!this._commandWindow) {
+    // Create Command Window
+    this._commandWindow = new Window_MenuCommand(10, 10);
+  };
+  // Deactivate
+  this._commandWindow.deactivate();
+  // Add Child
+  this.addChild(this._commandWindow);
+};
+//=============================================================================
+
+----- Omori Main Menu.js lin 907 -----
+// * Create
+//=============================================================================
+Scene_OmoMenuBase.prototype.create = function() {
+  // Create Command Window
+  this.createCommandWindow();
+  // Super Call
+  Scene_BaseEX.prototype.create.call(this);
+  // Create Status Window
+  this.createStatusWindow();
+};
+//=============================================================================
+// * Set Command Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.setCommandWindow = function(win) {
+  this._commandWindow = win;
+};
+//=============================================================================
+// * Set Status Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.setStatusWindow = function(win) {
+  this._statusWindow = win
+};
+//=============================================================================
+// * Create Command Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.createCommandWindow = function() {
+  // If Command Window Does Not Exist
+  if (!this._commandWindow) {
+    // Create Command Window
+    this._commandWindow = new Window_MenuCommand(10, 10);
+  };
+  // Deactivate
+  this._commandWindow.deactivate();
+  // Add Child
+  this.addChild(this._commandWindow);
+};
+//=============================================================================
+// * Status Windows
+//=============================================================================
+Scene_OmoMenuBase.prototype.createStatusWindows = function() {
+  // Create Status Window
+  if (!this._statusWindow) {
+    // Create Status Window
+
+----- Omori Main Menu.js lin 918 -----
+// * Set Command Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.setCommandWindow = function(win) {
+  this._commandWindow = win;
+};
+//=============================================================================
+// * Set Status Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.setStatusWindow = function(win) {
+  this._statusWindow = win
+};
+//=============================================================================
+// * Create Command Window
+//=============================================================================
+Scene_OmoMenuBase.prototype.createCommandWindow = function() {
+  // If Command Window Does Not Exist
+  if (!this._commandWindow) {
+    // Create Command Window
+    this._commandWindow = new Window_MenuCommand(10, 10);
+  };
+  // Deactivate
+  this._commandWindow.deactivate();
+  // Add Child
+  this.addChild(this._commandWindow);
+};
+//=============================================================================
+// * Status Windows
+//=============================================================================
+Scene_OmoMenuBase.prototype.createStatusWindows = function() {
+  // Create Status Window
+  if (!this._statusWindow) {
+    // Create Status Window
+    this._statusWindow = new Window_OmoMainMenuPartyStatus();
+  };
+  this._statusWindow.y = Graphics.height;
+  this.addChild(this._statusWindow);
+};
+//=============================================================================
+// * Create
+//=============================================================================
+Scene_OmoMenuBase.prototype.create = function() {
+  // Super Call
+  Scene_BaseEX.prototype.create.call(this);
+
+
+== B) yaml com 'optionsMenu:' ==
+----- ARQUIVO: languages\en\menus.yaml (2890 bytes) -----
+  optionsMenu:
+    general:
+      screenResolution:
+        text: SCREEN RESOLUTION
+        options: ['X1', 'X2', X3, X4]
+        help: Change the resolution of the screen.
+        spacing: 80
+
+      fullScreen:
+        text: FULLSCREEN
+        options: ['ON', 'OFF']
+        help: Make the game fullscreen.
+        boolIndex: true
+        spacing: 80
+
+      commandRemember:
+        text: REMEMBER SELECTED COMMANDS
+        options: ['ON', 'OFF']
+        help: Remember selected commands in battle.
+        boolIndex: true
+        spacing: 80
+
+      battleAnimations:
+        text: BATTLE ANIMATIONS
+        options: ['ON', 'OFF']
+        help: HELP TEXT
+        boolIndex: true
+        spacing: 80
+
+      battleAnimationSpeed:
+        text: BATTLE ANIMATION SPEED
+        options: ['NORMAL', 'FAST', 'FASTER', 'FASTEST']
+        help: HELP TEXT
+        spacing: 130
+
+      battleLogSpeed:
+        text: BATTLELOG SPEED
+        options: ['NORMAL', 'AUTO']
+        help: HELP TEXT
+        spacing: 130
+
+      alwaysDash:
+        text: CHARACTER MOVEMENT
+        options: ['DASH', 'WALK']
+        help: HELP TEXT
+        boolIndex: true
+        spacing: 130
+
+    audio:
+      bgmVolume:
+        text: BGM VOLUME
+        help: Change the volume of the background music.
+
+      bgsVolume:
+        text: BGS VOLUME
+        help: Change the volume of the background sounds.
+
+      meVolume:
+        text: ME VOLUME
+        help: Change the volume of the musical effects.
+
+      seVolume:
+        text: SE VOLUME
+        help: Change the volume of the sound effects.
+
+    controls:
+      keyboardHeader: KEYBOARD
+      gamepadHeader: GAMEPAD
+      pressKeyPrompt: PRESS A KEY
+      resetAll: RESET ALL
+      help: Press a key to change the input.
+      inputNames:
+        up: UP (â†‘)
+        down: DOWN (â†“)
+        left: LEFT (â†)
+        right: RIGHT (â†’)
+        ok: CONFIRM
+        escape: CANCEL
+        shift: RUN
+        tag: TAG
+        tab: STRAFE
+        pageup: LB
+        pagedown: RB
+
+    system:
+      load:
+        text: LOAD SAVE FILE
+        help: Load a save file.
+----- ARQUIVO: languages\en\System.yaml (37984 bytes) -----
+  optionsMenu:
+    alertMessages:
+      restoreGeneral: Default configuration has been restored. Do you want to recover global.rpgsave?
+    buttonHints:
+      confirm: CONFIRM
+      cancel: CANCEL
+    inputWarning:
+      keyboardMessage: "You can't edit KEYBOARD inputs using your GAMEPAD!"
+      gamepadMessage: "You can't edit GAMEPAD inputs using your KEYBOARD!"
+      gamepadNotDetected: "No compatible GAMEPADs detected."
+    general:
+      screenResolution:
+        text: SCREEN RESOLUTION
+        options: ['X1', 'X2']
+        help: Change the resolution of the screen.
+        spacing: 80
+
+      fullScreen:
+        text: FULLSCREEN
+        options: ['ON', 'OFF']
+        help: Make the game fullscreen.
+        boolIndex: true
+        spacing: 80
+
+      gamepadTips:
+        text: GAME INPUT TYPE
+        options: ['KEYBOARD', 'GAMEPAD']
+        help: Show gamepad or keyboard input icons.
+        boolIndex: false
+        spacing: 150
+
+      textSkip:
+        text: TEXT SKIP
+        options: ["ON", "OFF"]
+        help: Fast-forward text by pressing or holding CONFIRM or CANCEL.
+        boolIndex: true
+        spacing: 80
+
+  #    battleAnimations:
+  #      text: BATTLE ANIMATIONS
+  #      options: ['ON', 'OFF']
+  #      help: HELP TEXT
+#        boolIndex: true
+  #      spacing: 80
+
+  #    battleAnimationSpeed:
+  #      text: BATTLE ANIMATION SPEED
+#        options: ['NORMAL', 'FAST', 'FASTER', 'FASTEST']
+  #      help: HELP TEXT
+  #      spacing: 130
+
+      battleLogSpeed:
+        text: BATTLE TEXT
+        options: ['FAST', 'MEDIUM', 'SLOW']
+        help: Change the battle text display speed.
+        spacing: 130
+
+      alwaysDash:
+        text: CHARACTER MOVEMENT
+        options: ['DASH', 'WALK']
+        help: Toggle the default move speed between dashing and walking.
+        boolIndex: true
+        spacing: 130
+
+    audio:
+      bgmVolume:
+        text: BGM VOLUME
+        help: Change the volume of the background music.
+
+      bgsVolume:
+        text: BGS VOLUME
+        help: Change the volume of the background ambience.
+
+      meVolume:
+        text: ME VOLUME
+        help: Change the volume of the musical effects.
+
+      seVolume:
+        text: SE VOLUME
+        help: Change the volume of the sound effects.
+
+    controls:
+      keyboardHeader: KEYBOARD
+      gamepadHeader: GAMEPAD
+      pressKeyPrompt: PRESS A KEY
+      resetAll: RESET ALL
+      help: Press a key to change the input.
+      inputNames:
+        up: UP (â†‘)
+        down: DOWN (â†“)
+        left: LEFT (â†)
+        right: RIGHT (â†’)
+        ok: CONFIRM
+        escape: CANCEL/MENU
+        shift: RUN
+        tag: TAG
+#        tab: STRAFE
+        pageup: LB
+        pagedown: RB
+
+    system:
+      restoreConfig:
+        text: RESTORE DEFAULT SETTINGS
+        help: Restore default game settings and recover global.rpgsave.
+      load:
+        text: LOAD SAVE FILE
+        help: Load a save file.
+      toTitleScreen:
+        text: GO TO TITLE SCREEN
+        help: Return to the title screen.
+      toTitleScreenPrompt:
+        text: Return to the title screen?
+        commands: [YES, NO]
+      exit:
+        text: EXIT GAME
+        help: Exit the game.
+      exitPrompt:
+        text: Do you want to quit?
+        commands: [YES, NO]
+
+
+
+  albumMenu:
+    flipText: READ
+    closeText: PRESS || OR || TO RETURN TO THE GAME
+    legendText:
+      browsing:
+        - {text: 'READ:', inputs: [shift]}
+        - {text: 'VIEW:', inputs: [ok]}
+
+      placing:
+        - {text: 'PLACE:', inputs: [ok]}
+        - {text: 'RETURN:', inputs: [escape]}
+        - {text: 'TURN PAGE:', inputs: [pageup, pagedown]}
+
+  itemShopMenu:
+    ownedText: OWN
+    buyOptions: [YES, NO]
+    defaultText:
+      shopName: WELCOME TO MY SHOP!
+      buyHeader: WHAT WOULD YOU LIKE TO BUY?
+      sellHeader: WHAT WOULD YOU LIKE TO SELL?
+    shopKeepers:
+      mailbox:
+        showMailboxShopkeeper: true
+        shopName: WELCOME, VALUED CUSTOMER!
+        buyHeader: WHAT WOULD YOU LIKE TO BUY?
+        sellHeader: WHAT WOULD YOU LIKE TO SELL?
+        texts:
+          maxItemMessage: 'dreamworld_extras_shop.message_185'
+          notEnoughMoneyMessage: 'dreamworld_extras_shop.message_18'
+          onItemListBuyOkMessage: 'dreamworld_extras_shop.message_186'
+          onItemListSellOkMessage: 'dreamworld_extras_shop.message_187'
+          itemBuyingPromptMessage: 'dreamworld_extras_shop.message_184'
+          itemSellingPromptMessage: 'dreamworld_extras_shop.message_184'
+          itemBuyingConfirmationMessage: 'dreamworld_extras_shop.message_16'
+          itemSellingConfirmationMessage: 'dreamworld_extras_shop.message_16'
+          itemBuyingCancelMessage: 'dreamworld_extras_shop.message_189'
+          itemSellingCancelMessage: 'dreamworld_extras_shop.message_189'
+      snowconejash:
+        showMailboxShopkeeper: false
+        shopName: HELLO, LOYAL PATRON!
+        buyHeader: WHAT WOULD YOU LIKE TO BUY?
+        sellHeader: WHAT WOULD YOU LIKE TO SELL?
+        texts:
+          maxItemMessage: 'dreamworld_extras_shop.message_115'
+          notEnoughMoneyMessage: 'dreamworld_extras_shop.message_113'
+          onItemListBuyOkMessage: 'dreamworld_extras_shop.message_116'
+          onItemListSellOkMessage: 'dreamworld_extras_shop.message_117'
+          itemBuyingPromptMessage: 'dreamworld_extras_shop.message_114'
+          itemSellingPromptMessage: 'dreamworld_extras_shop.message_114'
+          itemBuyingConfirmationMessage: 'dreamworld_extras_shop.message_111'
+          itemSellingConfirmationMessage: 'dreamworld_extras_shop.message_111'
+          itemBuyingCancelMessage: 'dreamworld_extras_shop.message_119'
+          itemSellingCancelMessage: 'dreamworld_extras_shop.message_119'
+      smugglerjash:
+        showMailboxShopkeeper: false
+        shopName: HELLO, LOYAL PATRON!
+        buyHeader: WHAT WOULD YOU LIKE TO BUY?
+        sellHeader: WHAT WOULD YOU LIKE TO SELL?
+        texts:
+          maxItemMessage: 'dreamworld_extras_shop.message_255'
+          notEnoughMoneyMessage: 'dreamworld_extras_shop.message_253'
+          onItemListBuyOkMessage: 'dreamworld_extras_shop.message_256'
+          onItemListSellOkMessage: 'dreamworld_extras_shop.message_257'
+          itemBuyingPromptMessage: 'dreamworld_extras_shop.message_254'
+          itemSellingPromptMessage: 'dreamworld_extras_shop.message_254'
+          itemBuyingConfirmationMessage: 'dreamworld_extras_shop.message_251'
+          itemSellingConfirmationMessage: 'dreamworld_extras_shop.message_251'
+          itemBuyingCancelMessage: 'dreamworld_extras_shop.message_259'
+          itemSellingCancelMessage: 'dreamworld_extras_shop.message_259'
+      tofujash:
+        showMailboxShopkeeper: false
+        shopName: HELLO, LOYAL PATRON!
+        buyHeader: WHAT WOULD YOU LIKE TO BUY?
+        sellHeader: WHAT WOULD YOU LIKE TO SELL?
+        texts:
+          maxItemMessage: 'dreamworld_extras_shop.message_125'
+          notEnoughMoneyMessage: 'dreamworld_extras_shop.message_123'
+          onItemListBuyOkMessage: 'dreamworld_extras_shop.message_126'
+          onItemListSellOkMessage: 'dreamworld_extras_shop.message_127'
+          itemBuyingPromptMessage: 'dreamworld_extras_shop.message_124'
+          itemSellingPromptMessage: 'dreamworld_extras_shop.message_124'
+          itemBuyingConfirmationMessage: 'dreamworld_extras_shop.message_121'
+          itemSellingConfirmationMessage: 'dreamworld_extras_shop.message_121'
+          itemBuyingCancelMessage: 'dreamworld_extras_shop.message_129'
+          itemSellingCancelMessage: 'dreamworld_extras_shop.message_129'
+      lemonjash:
+        showMailboxShopkeeper: false
+        shopName: HELLO, LOYAL PATRON!
+        buyHeader: WHAT WOULD YOU LIKE TO BUY?
+        sellHeader: WHAT WOULD YOU LIKE TO SELL?
+        texts:
+          maxItemMessage: 'dreamworld_extras_shop.message_135'
+          notEnoughMoneyMessage: 'dreamworld_extras_shop.message_133'
+          onItemListBuyOkMessage: 'dreamworld_extras_shop.message_136'
+          onItemListSellOkMessage: 'dreamworld_extras_shop.message_137'
+          itemBuyingPromptMessage: 'dreamworld_extras_shop.message_134'
+          itemSellingPromptMessage: 'dreamworld_extras_shop.message_134'
+          itemBuyingConfirmationMessage: 'dreamworld_extras_shop.message_131'
+          itemSellingConfirmationMessage: 'dreamworld_extras_shop.message_131'
+          itemBuyingCancelMessage: 'dreamworld_extras_shop.message_139'
+          itemSellingCancelMessage: 'dreamworld_extras_shop.message_139'
+      partyjash:
+        showMailboxShopkeeper: false
+        shopName: HELLO, LOYAL PATRON!
+        buyHeader: WHAT WOULD YOU LIKE TO BUY?
+        sellHeader: WHAT WOULD YOU LIKE TO SELL?
+        texts:
+          maxItemMessage: 'dreamworld_extras_shop.message_145'
+          notEnoughMoneyMessage: 'dreamworld_extras_shop.message_143'
+          onItemListBuyOkMessage: 'dreamworld_extras_shop.message_146'
+          onItemListSellOkMessage: 'dreamworld_extras_shop.message_147'
+          itemBuyingPromptMessage: 'dreamworld_extras_shop.message_144'
+          itemSellingPromptMessage: 'dreamworld_extras_shop.message_144'
+          itemBuyingConfirmationMessage: 'dreamworld_extras_shop.message_141'
+          itemSellingConfirmationMessage: 'dreamworld_extras_shop.message_141'
+          itemBuyingCancelMessage: 'dreamworld_extras_shop.message_149'
+          itemSellingCancelMessage: 'dreamworld_extras_shop.message_149'
+      dealerjash:
+        showMailboxShopkeeper: false
+        shopName: HELLO, LOYAL PATRON!
+        buyHeader: WHAT WOULD YOU LIKE TO BUY?
+        sellHeader: WHAT WOULD YOU LIKE TO SELL?
+        texts:
+          maxItemMessage: 'dreamworld_extras_shop.message_175'
+          notEnoughMoneyMessage: 'dreamworld_extras_shop.message_173'
+          onItemListBuyOkMessage: 'dreamworld_extras_shop.message_176'
+          onItemListSellOkMessage: 'dreamworld_extras_shop.message_177'
+          itemBuyingPromptMessage: 'dreamworld_extras_shop.message_174'
+          itemSellingPromptMessage: 'dreamworld_extras_shop.message_174'
+          itemBuyingConfirmationMessage: 'dreamworld_extras_shop.message_171'
+          itemSellingConfirmationMessage: 'dreamworld_extras_shop.message_171'
+          itemBuyingCancelMessage: 'dreamworld_extras_shop.message_179'
+          itemSellingCancelMessage: 'dreamworld_extras_shop.message_179'
+      employee:
+        showMailboxShopkeeper: false
+        shopName: YOUR FAVORITE PITSTOP!
+        buyHeader: WHAT WOULD YOU LIKE TO BUY?
+        sellHeader: WHAT WOULD YOU LIKE TO SELL?
+        texts:
+          maxItemMessage: 'dreamworld_extras_shop.message_195'
+          notEnoughMoneyMessage: 'dreamworld_extras_shop.message_199'
+          onItemListBuyOkMessage: 'dreamworld_extras_shop.message_196'
+          onItemListSellOkMessage: 'dreamworld_extras_shop.message_197'
+          itemBuyingPromptMessage: 'dreamworld_extras_shop.message_152'
+          itemSellingPromptMessage: 'dreamworld_extras_shop.message_194'
+          itemBuyingConfirmationMessage: 'dreamworld_extras_shop.message_193'
+          itemSellingConfirmationMessage: 'dreamworld_extras_shop.message_193'
+          itemBuyingCancelMessage: 'dreamworld_extras_shop.message_151'
+          itemSellingCancelMessage: 'dreamworld_extras_shop.message_151'
+      baker:
+        showMailboxShopkeeper: false
+        shopName: WE'RE FAMILY-OWNED!
+        buyHeader: WHAT WOULD YOU LIKE TO BUY?
+        sellHeader: WHAT WOULD YOU LIKE TO SELL?
+        texts:
+          maxItemMessage: 'farawaytown_extras_shop.message_81'
+          notEnoughMoneyMessage: 'farawaytown_extras_shop.message_9'
+          onItemListBuyOkMessage: 'farawaytown_extras_shop.message_82'
+          onItemListSellOkMessage: 'farawaytown_extras_shop.message_83'
+          itemBuyingPromptMessage: 'farawaytown_extras_shop.message_84'
+          itemSellingPromptMessage: 'farawaytown_extras_shop.message_85'
+          itemBuyingConfirmationMessage: 'farawaytown_extras_shop.message_85'
+          itemSellingConfirmationMessage: 'farawaytown_extras_shop.message_84'
+          itemBuyingCancelMessage: 'farawaytown_extras_shop.message_86'
+          itemSellingCancelMessage: 'farawaytown_extras_shop.message_86'
+      pharmacy:
+        showMailboxShopkeeper: false
+        shopName: WE'LL PATCH YOU RIGHT UP!
+        buyHeader: WHAT WOULD YOU LIKE TO BUY?
+        sellHeader: WHAT WOULD YOU LIKE TO SELL?
+        texts:
+          maxItemMessage: 'farawaytown_extras_shop.message_91'
+          notEnoughMoneyMessage: 'farawaytown_extras_shop.message_98'
+          onItemListBuyOkMessage: 'farawaytown_extras_shop.message_92'
+          onItemListSellOkMessage: 'farawaytown_extras_shop.message_93'
+          itemBuyingPromptMessage: 'farawaytown_extras_shop.message_90'
+          itemSellingPromptMessage: 'farawaytown_extras_shop.message_94'
+          itemBuyingConfirmationMessage: 'farawaytown_extras_shop.message_97'
+          itemSellingConfirmationMessage: 'farawaytown_extras_shop.message_95'
+          itemBuyingCancelMessage: 'farawaytown_extras_shop.message_96'
+          itemSellingCancelMessage: 'farawaytown_extras_shop.message_96'
+      candy:
+        showMailboxShopkeeper: false
+        shopName: IT'S SMILEY, SMILEY TIME!
+        buyHeader: WHAT WOULD YOU LIKE TO BUY?
+        sellHeader: WHAT WOULD YOU LIKE TO SELL?
+        texts:
+          maxItemMessage: 'farawaytown_extras_shop.message_71'
+          notEnoughMoneyMessage: 'farawaytown_extras_shop.message_16'
+          onItemListBuyOkMessage: 'farawaytown_extras_shop.message_72'
+          onItemListSellOkMessage: 'farawaytown_extras_shop.message_73'
+          itemBuyingPromptMessage: 'farawaytown_extras_shop.message_70'
+          itemSellingPromptMessage: 'farawaytown_extras_shop.message_74'
+          itemBuyingConfirmationMessage: 'farawaytown_extras_shop.message_15'
+          itemSellingConfirmationMessage: 'farawaytown_extras_shop.message_75'
+          itemBuyingCancelMessage: 'farawaytown_extras_shop.message_76'
+          itemSellingCancelMessage: 'farawaytown_extras_shop.message_76'
+      butcher:
+        showMailboxShopkeeper: false
+        shopName: ALL MEAT, ONLY MEAT!
+        buyHeader: WHAT WOULD YOU LIKE TO BUY?
+        sellHeader: WHAT WOULD YOU LIKE TO SELL?
+        texts:
+          maxItemMessage: 'farawaytown_extras_shop.message_202'
+          notEnoughMoneyMessage: 'farawaytown_extras_shop.message_203'
+          onItemListBuyOkMessage: 'farawaytown_extras_shop.message_205'
+          onItemListSellOkMessage: 'farawaytown_extras_shop.message_204'
+          itemBuyingPromptMessage: 'farawaytown_extras_shop.message_206'
+          itemSellingPromptMessage: 'farawaytown_extras_shop.message_205'
+          itemBuyingConfirmationMessage: 'farawaytown_extras_shop.message_207'
+          itemSellingConfirmationMessage: 'farawaytown_extras_shop.message_207'
+          itemBuyingCancelMessage: 'farawaytown_extras_shop.message_208'
+          itemSellingCancelMessage: 'farawaytown_extras_shop.message_208'
+      collectornerd:
+        showMailboxShopkeeper: false
+        shopName: BEEZ YOURSELF!
+        buyHeader: WHAT WOULD YOU LIKE TO BUY?
+        sellHeader: WHAT WOULD YOU LIKE TO SELL?
+        texts:
+          maxItemMessage: 'farawaytown_extras_shop.message_41'
+          notEnoughMoneyMessage: 'farawaytown_extras_shop.message_21'
+          onItemListBuyOkMessage: 'farawaytown_extras_shop.message_42'
+          onItemListSellOkMessage: 'farawaytown_extras_shop.message_700'
+          itemBuyingPromptMessage: 'farawaytown_extras_shop.message_40'
+          itemSellingPromptMessage: 'farawaytown_extras_shop.message_44'
+          itemBuyingConfirmationMessage: 'farawaytown_extras_shop.message_20'
+          itemSellingConfirmationMessage: 'farawaytown_extras_shop.message_45'
+          itemBuyingCancelMessage: 'farawaytown_extras_shop.message_46'
+          itemSellingCancelMessage: 'farawaytown_extras_shop.message_46'
+      ginospizza:
+        showMailboxShopkeeper: false
+        shopName: TAKE A LOAD OFF!
+        buyHeader: WHAT WOULD YOU LIKE TO BUY?
+        sellHeader: WHAT WOULD YOU LIKE TO SELL?
+        texts:
+          maxItemMessage: 'farawaytown_extras_shop.message_51'
+          notEnoughMoneyMessage: 'farawaytown_extras_shop.message_25'
+          onItemListBuyOkMessage: 'farawaytown_extras_shop.message_52'
+          onItemListSellOkMessage: 'farawaytown_extras_shop.message_53'
+          itemBuyingPromptMessage: 'farawaytown_extras_shop.message_50'
+          itemSellingPromptMessage: 'farawaytown_extras_shop.message_54'
+          itemBuyingConfirmationMessage: 'farawaytown_extras_shop.message_23'
+          itemSellingConfirmationMessage: 'farawaytown_extras_shop.message_55'
+          itemBuyingCancelMessage: 'farawaytown_extras_shop.message_56'
+          itemSellingCancelMessage: 'farawaytown_extras_shop.message_56'
+      fixit:
+        showMailboxShopkeeper: false
+        shopName: FIX-IT YOURSELF!
+        buyHeader: WHAT WOULD YOU LIKE TO BUY?
+        sellHeader: WHAT WOULD YOU LIKE TO SELL?
+        texts:
+          maxItemMessage: 'farawaytown_extras_shop.message_61'
+          notEnoughMoneyMessage: 'farawaytown_extras_shop.message_28'
+          onItemListBuyOkMessage: 'farawaytown_extras_shop.message_62'
+          onItemListSellOkMessage: 'farawaytown_extras_shop.message_63'
+          itemBuyingPromptMessage: 'farawaytown_extras_shop.message_60'
+          itemSellingPromptMessage: 'farawaytown_extras_shop.message_64'
+          itemBuyingConfirmationMessage: 'farawaytown_extras_shop.message_27'
+          itemSellingConfirmationMessage: 'farawaytown_extras_shop.message_65'
+          itemBuyingCancelMessage: 'farawaytown_extras_shop.message_66'
+          itemSellingCancelMessage: 'farawaytown_extras_shop.message_66'
+      supermarketlady:
+        showMailboxShopkeeper: false
+        shopName: BUY SOMETHING, OK?
+        buyHeader: WHAT WOULD YOU LIKE TO BUY?
+        sellHeader: WHAT WOULD YOU LIKE TO SELL?
+        texts:
+          maxItemMessage: 'farawaytown_extras_shop.message_101'
+          notEnoughMoneyMessage: 'farawaytown_extras_shop.message_6'
+          onItemListBuyOkMessage: 'farawaytown_extras_shop.message_102'
+          onItemListSellOkMessage: 'farawaytown_extras_shop.message_103'
+          itemBuyingPromptMessage: 'farawaytown_extras_shop.message_100'
+          itemSellingPromptMessage: 'farawaytown_extras_shop.message_104'
+          itemBuyingConfirmationMessage: 'farawaytown_extras_shop.message_2'
+          itemSellingConfirmationMessage: 'farawaytown_extras_shop.message_105'
+          itemBuyingCancelMessage: 'farawaytown_extras_shop.message_106'
+          itemSellingCancelMessage: 'farawaytown_extras_shop.message_106'
+
+  questMenu:
+
+== C) Omori Title Screen.js 975-1090 ==
+//=============================================================================
+// * Options Command
+//=============================================================================
+Scene_OmoriTitleScreen.prototype.commandOptions = function() {
+
+
+  this.queue(function() {
+    for (var i = 0; i < this._titleCommands.length; i++) {
+      // Set Duration
+      var duration = 15;
+      var obj = this._titleCommands[i];
+      var data = { obj: obj, properties: ['y', 'opacity', 'contentsOpacity'], from: {y: obj.y, opacity: obj.opacity, contentsOpacity: obj.contentsOpacity}, to: {y: Graphics.height, opacity: 255, contentsOpacity: 255}, durations: {y: duration, opacity: duration, contentsOpacity: duration}}
+      data.easing = Object_Movement.easeOutCirc;
+      this.move.startMove(data);
+    };
+    // Set Duration
+    var duration = 35;
+    var obj = this._optionsWindowsContainer;
+    var data = { obj: obj, properties: ['y', 'opacity'], from: {y: obj.y, opacity: obj.opacity}, to: {y: 37, opacity: 255}, durations: {y: duration, opacity: duration}}
+    data.easing = Object_Movement.easeOutCirc;
+    this.move.startMove(data);
+  }.bind(this))
+
+  // Wait
+  this.queue('setWaitMode', 'movement');
+
+  this.queue(function() {
+    // Activate Option Category Window
+    this._optionCategoriesWindow.activate();
+    this._controlOptionsWindow.refresh();
+  }.bind(this))
+};
+//=============================================================================
+// * On Option Category Ok
+//=============================================================================
+Scene_OmoriTitleScreen.prototype.onCategoryOk = function() {
+  // Get Category Window
+  var categoryWindow = this.optionWindows()[this._optionCategoriesWindow.index()];
+  // If Category Window Exists
+  if (categoryWindow) {
+    categoryWindow.activate();
+    categoryWindow.select(0);
+    categoryWindow.refresh()
+  } else {
+    // Activate Categories Window
+    this._optionCategoriesWindow.activate();
+  };
+};
+//=============================================================================
+// * On Option Category Cancel
+//=============================================================================
+Scene_OmoriTitleScreen.prototype.onCategoryCancel = function() {
+  // Save Configuration
+  ConfigManager.save();
+
+  this.queue(function() {
+    for (var i = 0; i < this._titleCommands.length; i++) {
+      // Set Duration
+      var duration = 15;
+      var obj = this._titleCommands[i];
+      var data = { obj: obj, properties: ['y', 'opacity', 'contentsOpacity'], from: {y: obj.y, opacity: obj.opacity, contentsOpacity: obj.contentsOpacity}, to: {y: (Graphics.height - obj.height) - 22, opacity: 255, contentsOpacity: 255}, durations: {y: duration, opacity: duration, contentsOpacity: duration}}
+      data.easing = Object_Movement.easeOutCirc;
+      this.move.startMove(data);
+    };
+    // Set Duration
+    var duration = 25;
+    var obj = this._optionsWindowsContainer;
+    var data = { obj: obj, properties: ['y', 'opacity'], from: {y: obj.y, opacity: obj.opacity}, to: {y: -406, opacity: 255}, durations: {y: duration, opacity: duration}}
+    data.easing = Object_Movement.easeOutCirc;
+    this.move.startMove(data);
+  }.bind(this))
+
+  // Wait
+  this.queue('setWaitMode', 'movement');
+
+  this.queue(function() {
+    this._commandActive = true;
+  }.bind(this))
+};
+//=============================================================================
+// * On Option Window Cancel
+//=============================================================================
+Scene_OmoriTitleScreen.prototype.onOptionWindowCancel = function() {
+  // Get Category Window
+  var categoryWindow = this.optionWindows()[this._optionCategoriesWindow.index()];
+  // If Category Window Exists
+  if (categoryWindow) {
+    categoryWindow.select(0);
+    categoryWindow.refresh();
+  };
+  // Clear Help Window Text
+  this._helpWindow.clear()
+  // Activate Categories Window
+  this._optionCategoriesWindow.activate();
+};
+
+
+
+//=============================================================================
+// ** Window_OmoTitleScreenBox
+//-----------------------------------------------------------------------------
+// This window is used in the title screen to display commands.
+//=============================================================================
+function Window_OmoTitleScreenBox() { this.initialize.apply(this, arguments); }
+Window_OmoTitleScreenBox.prototype = Object.create(Window_Selectable.prototype);
+Window_OmoTitleScreenBox.prototype.constructor = Window_OmoTitleScreenBox;
+//=============================================================================
+// * Object Initialization
+//=============================================================================
+Window_OmoTitleScreenBox.prototype.initialize = function(text = '') {
+  // Set Set
+  this._text = text;
+  // Super Call
+  Window_Selectable.prototype.initialize.call(this, 0, 0, 160 - 30, 30);
+  // BlueMoon - Fix Title Screen Spacing:
+  this.width = this.textWidth(this._text) + this.standardPadding() * 6;
+
+=== MAPA17 OK ===
